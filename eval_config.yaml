@@ -1,0 +1,44 @@
+# Pass bars for the eval CLI. Offline metrics are measured in CI.
+# Live RAGAS metrics run only when OPENAI_API_KEY is set. Their bars are
+# configuration, not scores from a live run in this repository.
+retrieval:
+  top_k: 6
+  other_region_factor: 0.2
+  global_factor: 0.92
+  max_sentences: 3
+
+embeddings:
+  dimensions: 768
+
+chunking:
+  chunk_size: 4000
+  chunk_overlap: 200
+
+llm:
+  answer_model: gpt-4o-mini
+  judge_model: gpt-4o-mini
+  embedding_model: text-embedding-3-small
+
+thresholds:
+  non_llm_context_recall: 0.85
+  answer_string_presence: 0.90
+  refusal_correctness: 0.95
+  hit_rate: 0.85
+  mrr: 0.70
+  faithfulness: 0.70
+  answer_relevancy: 0.70
+  context_precision: 0.60
+  context_recall: 0.70
+
+offline_metrics:
+  - non_llm_context_recall
+  - answer_string_presence
+  - refusal_correctness
+  - hit_rate
+  - mrr
+
+live_metrics:
+  - faithfulness
+  - answer_relevancy
+  - context_precision
+  - context_recall
