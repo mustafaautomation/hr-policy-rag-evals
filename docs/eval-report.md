@@ -117,7 +117,7 @@ No per-question failures in the improved offline run.
 | learning-uk | answer | 0.000 | 0.000 | 0.000 | conduct, grievances, health-us, about-handbook, de-leave, de-parental |
 | grievance-ack | answer | 0.000 | 0.000 | 1.000 | about-handbook, travel, de-sick, retirement-de, health-uk, employee-data |
 | probation-uk | answer | 0.000 | 0.000 | 1.000 | grievances, expenses, equipment, about-handbook, conduct, de-leave |
-| harassment-hotline | answer | 0.000 | 0.000 | 1.000 | pay-confidentiality, remote, about-handbook, de-leave, de-parental, de-sick |
+| harassment-hotline | answer | 0.000 | 0.000 | 1.000 | pay-confidentiality, about-handbook, de-leave, de-parental, de-sick, expenses |
 | own-salary | answer | 0.000 | 0.000 | 0.000 | harassment, conduct, de-leave, de-parental, de-sick, employee-data |
 | privacy-contact | answer | 0.000 | 0.000 | 0.000 | pay-confidentiality, de-leave, about-handbook, conduct, de-parental, de-sick |
 | us-vs-uk-leave | answer | 0.000 | 0.000 | 1.000 | health-de, about-handbook, grievances, equipment, conduct, employee-data |

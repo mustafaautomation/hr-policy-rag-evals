@@ -66,7 +66,9 @@ class Retriever:
         raw_scores = self.index.scores(query)
         ranked = list(range(len(self.chunks)))
         if self.mode == "worst":
-            ranked.sort(key=lambda row: (float(raw_scores[row]), self.chunks[row].id))
+            ranked.sort(
+                key=lambda row: (self._rank_score(float(raw_scores[row])), self.chunks[row].id)
+            )
         else:
             if regions:
                 filtered = [
@@ -78,7 +80,9 @@ class Retriever:
                     ranked = filtered
             ranked.sort(
                 key=lambda row: (
-                    -self._boost(self.chunks[row], regions, float(raw_scores[row])),
+                    -self._rank_score(
+                        self._boost(self.chunks[row], regions, float(raw_scores[row]))
+                    ),
                     self.chunks[row].id,
                 )
             )
@@ -86,6 +90,10 @@ class Retriever:
         for row in ranked[: self.settings.top_k]:
             hits.append(Hit(chunk=self.chunks[row], score=float(raw_scores[row])))
         return hits
+
+    def _rank_score(self, score: float) -> float:
+        # Collapse float32 noise from FAISS so tied chunks sort by id on every CPU.
+        return round(score, 4)
 
     def _boost(self, chunk: Chunk, regions: set[str], score: float) -> float:
         if not regions:
