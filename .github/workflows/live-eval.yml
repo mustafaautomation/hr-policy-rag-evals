@@ -1,0 +1,26 @@
+name: Live eval
+
+on:
+  workflow_dispatch:
+
+jobs:
+  live-eval:
+    name: live eval
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - run: uv sync --frozen --group dev
+      - name: Run live RAGAS eval when OPENAI_API_KEY is set
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "OPENAI_API_KEY is not set. Skipping live eval."
+            exit 0
+          fi
+          uv run hr-rag eval --mode live
